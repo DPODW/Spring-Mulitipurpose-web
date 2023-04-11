@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="kr"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form th:action method="post">
+   <h1 th:text="|회원수정 중인 아이디: ${idMember.getJoinId()}|"></h1>
+   <p><input th:text="#{name}" type="name" id="Update-Name" name="joinName" placeholder="서버에 연결되어있나요?" th:placeholder="#{join.name}" th:value="${idMember.getJoinName()}" > </p>
+   <p> <input th:text="#{id.readonly}" type="id" id="Update-Id" name="joinId" placeholder="아이디 변경 불가" maxlength="20" th:placeholder="#{join.id}" th:value="${idMember.getJoinId()}" readonly></p>
+   <p> <input th:text="#{pwd}" type="password" id="Update-Pwd" name="joinPwd" placeholder="서버에 연결되어있나요?" maxlength="20" th:placeholder="#{join.pwd}" th:value="${idMember.getJoinPwd()}"> </p>
+   <p> <input th:text="#{pwd.check}" type="password" id="Update-PwdCheck" name="Update-pwdCheck" placeholder="비밀번호 동일 체크" maxlength="20" th:placeholder="#{pwd.check.ph}"> <button type="submit" onclick="">비밀번호 동일 체크</button> </p>
+   <p> <input th:text="#{call}" type="number" id="Update-Call" name="joinCall" placeholder="서버에 연결되어있나요?" th:placeholder="#{join.call}" th:value="${idMember.getJoinCall()}"> </p>
+   <p><button type="submit" th:onclick="|location.href='@{/user/memberUpdate}'|">회원수정</button>
+   
+    </form>
+</body>
+</html>

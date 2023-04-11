@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        a{
+            text-decoration-line:none ;
+            color: black;
+
+        }
+    </style>
+
+
+    <h1>홈 화면</h1>
+    <h1 th:text="|로그인 중인 아이디: ${id}|"></h1>
+    <form th:action="@{/login/logout}" method="post">
+        <button>로그아웃</button>
+    </form>
+    <a th:href="@{/user/member1}">[[회원수정]]-----</a>
+    <a th:href="@{/user/member2}">[[회원탈퇴]]-----</a>
+    <a href="">[[게시글]]-----</a>
+    <a href="">??</a>
+
+</body>
+</html>

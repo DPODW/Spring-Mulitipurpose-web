@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="kr"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form th:method="get">
+
+   <p><input th:text="#{name}" type="name" id="JoinName" name="joinName" placeholder="서버에 연결되어있나요?" maxlength="20" th:value="${joinMember.getJoinName()}" disabled> </p>
+   <p><input th:text="#{id}" type="id" id="JoinId" name="joinId" placeholder="서버에 연결되어있나요?"maxlength="20" th:value="${joinMember.getJoinId()}" disabled>
+   <p><input th:text="#{pwd}" type="password" id="JoinPwd" name="joinPwd"placeholder="서버에 연결되어있나요?"maxlength="20" th:value="${joinMember.getJoinPwd()}" disabled> </p>
+   <p><input th:text="#{call}" type="number" id="JoinCall" name="joinCall" placeholder="서버에 연결되어있나요?"th:value="${joinMember.getJoinCall()}" disabled> </p>
+    <a th:href="@{/home/}">클릭시 홈으로</a>
+    </form>
+</body>
+</html>

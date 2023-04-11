@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .field-error{
+            border-color: red;
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+   <form th:action method="post" th:object="${loginMember}">
+       <div th:if="${#fields.hasGlobalErrors()}">
+           <h3 class="field-error"  th:text="${#fields.globalErrors()}">오류</h3>
+       </div>
+   <p> <input th:text="#{join.id}" type="id" id="LoginId" name="LoginId" placeholder="서버에 연결되어있나요?" th:value="*{loginId}" th:placeholder="#{join.id}" maxlength="20">
+       <h3 th:errorclass="field-error" th:errors="*{loginId}"></h3>
+   </p>
+   <p> <input th:text="#{join.pwd}" type="password" id="LoginPwd" name="LoginPwd" placeholder="서버에 연결되어있나요?" th:value="*{loginPwd}" th:placeholder="#{join.pwd}" maxlength="20">
+       <h3 th:errorclass="field-error" th:errors="*{loginPwd}"></h3>
+   </p>
+   <p><button type="submit" onclick="" th:onclick="|location.href='@{/login/logins}'|">로그인</button></p>
+    </form>
+   <p><button type="submit" onclick=""  th:onclick="|location.href='@{/user/joins}'|">회원가입</button></p>
+</body>
+</html>
