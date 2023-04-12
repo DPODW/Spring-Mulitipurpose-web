@@ -5,15 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .field-error{
+            border-color: red;
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <form th:action method="post">
-   <h1 th:text="|회원수정 중인 아이디: ${idMember.getJoinId()}|"></h1>
-   <p><input th:text="#{name}" type="name" id="Update-Name" name="joinName" placeholder="서버에 연결되어있나요?" th:placeholder="#{join.name}" th:value="${idMember.getJoinName()}" > </p>
-   <p> <input th:text="#{id.readonly}" type="id" id="Update-Id" name="joinId" placeholder="아이디 변경 불가" maxlength="20" th:placeholder="#{join.id}" th:value="${idMember.getJoinId()}" readonly></p>
-   <p> <input th:text="#{pwd}" type="password" id="Update-Pwd" name="joinPwd" placeholder="서버에 연결되어있나요?" maxlength="20" th:placeholder="#{join.pwd}" th:value="${idMember.getJoinPwd()}"> </p>
-   <p> <input th:text="#{pwd.check}" type="password" id="Update-PwdCheck" name="Update-pwdCheck" placeholder="비밀번호 동일 체크" maxlength="20" th:placeholder="#{pwd.check.ph}"> <button type="submit" onclick="">비밀번호 동일 체크</button> </p>
-   <p> <input th:text="#{call}" type="number" id="Update-Call" name="joinCall" placeholder="서버에 연결되어있나요?" th:placeholder="#{join.call}" th:value="${idMember.getJoinCall()}"> </p>
+    <form th:action  th:object="${idMember}" method="post">
+   <p>
+       <input th:text="#{name}" type="text" id="Update-Name" placeholder="서버에 연결되어있나요?"
+             th:placeholder="#{join.name}" th:field="*{joinName}">
+        <h3 th:errorclass="field-error" th:errors="*{joinName}"></h3>
+   </p>
+
+   <p> <input th:text="#{id.readonly}" type="text" id="Update-Id" placeholder="아이디 변경 불가" maxlength="20"
+              th:placeholder="#{join.id}" th:field="*{joinId}" readonly></p>
+
+   <p>
+       <input th:text="#{pwd}" type="password" id="Update-Pwd"  placeholder="서버에 연결되어있나요?" maxlength="20"
+              th:placeholder="#{join.pwd}" th:field="*{joinPwd}">
+        <h3 th:class="field-error" th:errors="*{joinPwd}"></h3>
+   </p>
+
+   <p> <input th:text="#{pwd.check}" type="password" id="Update-PwdCheck" name="Update-pwdCheck" placeholder="비밀번호 동일 체크" maxlength="20"
+              th:placeholder="#{pwd.check.ph}"> <button type="submit" onclick="">비밀번호 동일 체크</button> </p>
+
+   <p> <input th:text="#{call}" type="text" id="Update-Call"  placeholder="서버에 연결되어있나요?"
+              th:placeholder="#{join.call}" th:field="*{joinCall}">
+        <h3 th:class="field-error" th:errors="*{joinCall}"></h3>
+   </p>
+
    <p><button type="submit" th:onclick="|location.href='@{/user/memberUpdate}'|">회원수정</button>
    
     </form>

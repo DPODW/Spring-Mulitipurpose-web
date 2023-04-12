@@ -35,6 +35,7 @@ public class MemberController {
         Object sessionData = session.getAttribute(SessionConst.LOGIN_MEMBER);
         JoinMember updateMember = memberService.memberInfoView((LoginMember)sessionData);
         model.addAttribute("idMember",updateMember);
+        log.info("{}",updateMember);
         return "memberView/MemberUpdate";
     }
 
@@ -59,18 +60,23 @@ public class MemberController {
             return "memberView/member";
         }else {
             log.info("{}",bindingResult);
-            log.info("ㅇㅇ");
             return "memberView/Join";
         }
     }
 
 
     @PostMapping("/member1")
-    public String memberUpdate(@Validated @ModelAttribute JoinMember updateMember,  BindingResult bindingResult ,Model model){
-        JoinMember memberUpdate = memberService.memberUpdate(updateMember);
-        model.addAttribute("joinMember",memberUpdate);
-        return "memberView/member";
+    public String memberUpdate(@Validated @ModelAttribute("idMember") JoinMember updateMember,BindingResult bindingResult ,Model model){
+        if(!bindingResult.hasErrors()){
+            JoinMember memberUpdate = memberService.memberUpdate(updateMember);
+            model.addAttribute("idMember",memberUpdate);
+            return "memberView/member";
+        }else {
+            log.info("{}",bindingResult);
+            return "memberView/MemberUpdate";
+        }
     }
+
 
 
     @PostMapping("/member2")
