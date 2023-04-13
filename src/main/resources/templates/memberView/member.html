@@ -7,12 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form th:method="get">
+    <form th:method="get" th:object="${joinMember}">
 
-   <p><input th:text="#{name}" type="name" id="JoinName" name="joinName" placeholder="서버에 연결되어있나요?" maxlength="20" th:value="${joinMember.getJoinName()}" disabled> </p>
-   <p><input th:text="#{id}" type="id" id="JoinId" name="joinId" placeholder="서버에 연결되어있나요?"maxlength="20" th:value="${joinMember.getJoinId()}" disabled>
+   <p><input th:text="#{name}" type="text" id="JoinName" placeholder="서버에 연결되어있나요?" th:field="*{joinName}" maxlength="20" disabled> </p>
+   <p><input th:text="#{id}" type="text" id="JoinId"  placeholder="서버에 연결되어있나요?"  th:field="*{joinId}" maxlength="20" disabled>
    <p><input th:text="#{pwd}" type="password" id="JoinPwd" name="joinPwd"placeholder="서버에 연결되어있나요?"maxlength="20" th:value="${joinMember.getJoinPwd()}" disabled> </p>
-   <p><input th:text="#{call}" type="number" id="JoinCall" name="joinCall" placeholder="서버에 연결되어있나요?"th:value="${joinMember.getJoinCall()}" disabled> </p>
+   <p><input th:text="#{call}" type="text" id="JoinCall" th:field="*{joinCall}"  placeholder="서버에 연결되어있나요?" disabled> </p>
     <a th:href="@{/home/}">클릭시 홈으로</a>
     </form>
 </body>

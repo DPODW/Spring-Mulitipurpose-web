@@ -23,9 +23,10 @@ public class MemberController {
      private final MemberService memberService;
      private final LoginController loginController;
 
+
     @GetMapping("/joins")
-    public String joinForm(Model model){
-        model.addAttribute("joinMember", new JoinMember());
+    public String joinForm(JoinMember joinMember , Model model){
+        model.addAttribute("joinMember", joinMember);
         return "memberView/Join";
     }
 
@@ -53,7 +54,6 @@ public class MemberController {
 
     @PostMapping("/joins")
     public String join(@Validated @ModelAttribute JoinMember joinMember,BindingResult bindingResult,Model model){
-        log.info("회원가입 컨트롤러 호출");
         if(!bindingResult.hasErrors()){
             memberService.joinOk(joinMember);
             model.addAttribute(joinMember);
@@ -70,7 +70,7 @@ public class MemberController {
         if(!bindingResult.hasErrors()){
             JoinMember memberUpdate = memberService.memberUpdate(updateMember);
             model.addAttribute("idMember",memberUpdate);
-            return "memberView/member";
+            return "memberView/MemberUpdateOk";
         }else {
             log.info("{}",bindingResult);
             return "memberView/MemberUpdate";

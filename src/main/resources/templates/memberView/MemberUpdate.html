@@ -14,9 +14,11 @@
 </head>
 <body>
     <form th:action  th:object="${idMember}" method="post">
+     <h3 th:text="|접속중인 아이디 아이디: *{joinId}|"></h3>
    <p>
        <input th:text="#{name}" type="text" id="Update-Name" placeholder="서버에 연결되어있나요?"
              th:placeholder="#{join.name}" th:field="*{joinName}">
+        <sub th:text="#{join.name.sub}"></sub>
         <h3 th:errorclass="field-error" th:errors="*{joinName}"></h3>
    </p>
 
@@ -26,14 +28,19 @@
    <p>
        <input th:text="#{pwd}" type="password" id="Update-Pwd"  placeholder="서버에 연결되어있나요?" maxlength="20"
               th:placeholder="#{join.pwd}" th:field="*{joinPwd}">
+        <sub th:text="#{join.pwd.sub}"></sub>
         <h3 th:class="field-error" th:errors="*{joinPwd}"></h3>
    </p>
 
-   <p> <input th:text="#{pwd.check}" type="password" id="Update-PwdCheck" name="Update-pwdCheck" placeholder="비밀번호 동일 체크" maxlength="20"
-              th:placeholder="#{pwd.check.ph}"> <button type="submit" onclick="">비밀번호 동일 체크</button> </p>
+   <p>
+       <input th:text="#{pwd.check}" type="password" id="Update-PwdCheck" name="Update-pwdCheck" placeholder="비밀번호 동일 체크" maxlength="20"
+              th:placeholder="#{pwd.check.ph}"> <button type="submit" onclick="">비밀번호 동일 체크</button>
+   </p>
 
-   <p> <input th:text="#{call}" type="text" id="Update-Call"  placeholder="서버에 연결되어있나요?"
+   <p>
+       <input th:text="#{call}" type="text" id="Update-Call"  placeholder="서버에 연결되어있나요?"
               th:placeholder="#{join.call}" th:field="*{joinCall}">
+        <sub th:text="#{join.call.sub}"></sub>
         <h3 th:class="field-error" th:errors="*{joinCall}"></h3>
    </p>
 

@@ -8,12 +8,12 @@
 </head>
 <body>
 <!-- 여기엔 삭제할 정보가 무조건 들어가야 하기 때문에 (model로) 타임리프 메시지 프로퍼티를 사용하지 않음-->
-    <form th:action method="post">
+    <form th:action method="post" th:object="${idMember}">
         <h1>탈퇴화면에서 회원정보 수정은 불가능 합니다.</h1>
-   <p><input th:text="#{name}" type="name" id="Delete-name" name="joinName" placeholder="서버에 연결되어있나요?" th:value="${idMember.getJoinName()}" readonly></p>
-   <p><input th:text="#{id}" type="id" id="Delete-id" name="joinId" placeholder="서버에 연결되어있나요?" th:value="${idMember.getJoinId()}" readonly></p>
+   <p><input th:text="#{name}" type="text" id="Delete-name" th:field="*{joinName}" placeholder="서버에 연결되어있나요?"  readonly></p>
+   <p><input th:text="#{id}" type="text" id="Delete-id" th:field="*{joinId}" placeholder="서버에 연결되어있나요?" readonly></p>
    <p><input th:text="#{pwd}" type="password" id="Delete-pwd" name="joinPwd" placeholder="서버에 연결되어있나요?" th:value="${idMember.getJoinPwd()}" readonly> </p>
-   <p><input th:text="#{call}" type="number" id="Delete-call" name="joinCall" placeholder="서버에 연결되어있나요?" th:value="${idMember.getJoinCall()}" readonly></p>
+   <p><input th:text="#{call}" type="text" id="Delete-call" th:field="*{joinCall}" placeholder="서버에 연결되어있나요?"  readonly></p>
    <p><button type="submit" th:onclick="|location.href='@{/user/memberDelete}'|">탈퇴하시겠습니까?</button>
     </form>
 </body>

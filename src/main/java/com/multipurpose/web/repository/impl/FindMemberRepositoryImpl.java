@@ -1,9 +1,11 @@
 package com.multipurpose.web.repository.impl;
 
+import com.multipurpose.web.mapper.IdDuplicatedCheckMapper;
 import com.multipurpose.web.mapper.JoinMapper;
 import com.multipurpose.web.repository.FindMemberRepository;
 import com.multipurpose.web.vo.JoinMember;
 import com.multipurpose.web.vo.LoginMember;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.util.List;
 
+
+@Slf4j
 @Repository
 public class FindMemberRepositoryImpl implements FindMemberRepository {
     private JdbcTemplate jdbcTemplate;
@@ -38,7 +42,9 @@ public class FindMemberRepositoryImpl implements FindMemberRepository {
     @Override
     public List<JoinMember> findDuplicateId(String duplicateId) {
         String QueryFindDuplicateId = "select joinId from member where joinId=?";
-        List<JoinMember> result = jdbcTemplate.query(QueryFindDuplicateId, new JoinMapper(),duplicateId);
+        log.info("db 실행중- - -");
+        List<JoinMember> result = jdbcTemplate.query(QueryFindDuplicateId, new IdDuplicatedCheckMapper(),duplicateId);
+        log.info("db result{}",result);
         return result;
     }
 }
