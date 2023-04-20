@@ -1,23 +1,15 @@
 package com.multipurpose.web.service;
 
-import com.multipurpose.web.repository.FindMemberRepository;
 import com.multipurpose.web.vo.JoinMember;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-@Slf4j
-@Service
-public class JoinCheckService {
+public interface JoinCheckService {
 
-    private final FindMemberRepository findMemberRepository;
+    boolean duplicateIdCheck(String duplicateId);
 
-    public List<JoinMember> duplicationCheck(String duplicateId){
-        List<JoinMember> checkMember = findMemberRepository.findDuplicateId(duplicateId);
-        log.info("{}",checkMember.toString());
-        return checkMember;
-    }
+    boolean comparePwdCheck(String userPwd , String samePwd);
+
+    boolean duplicateCallCheck(String duplicatedCall);
+
 }

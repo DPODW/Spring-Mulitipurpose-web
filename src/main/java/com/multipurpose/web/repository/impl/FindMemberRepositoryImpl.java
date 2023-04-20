@@ -1,5 +1,6 @@
 package com.multipurpose.web.repository.impl;
 
+import com.multipurpose.web.mapper.CallDuplicatedCheckMapper;
 import com.multipurpose.web.mapper.IdDuplicatedCheckMapper;
 import com.multipurpose.web.mapper.JoinMapper;
 import com.multipurpose.web.repository.FindMemberRepository;
@@ -42,9 +43,14 @@ public class FindMemberRepositoryImpl implements FindMemberRepository {
     @Override
     public List<JoinMember> findDuplicateId(String duplicateId) {
         String QueryFindDuplicateId = "select joinId from member where joinId=?";
-        log.info("db 실행중- - -");
         List<JoinMember> result = jdbcTemplate.query(QueryFindDuplicateId, new IdDuplicatedCheckMapper(),duplicateId);
-        log.info("db result{}",result);
+        return result;
+    }
+
+    @Override
+    public List<JoinMember> findDuplicateCall(String duplicateCall) {
+        String QueryFindDuplicateCall = "select joinCall from member where joinCall=?";
+        List<JoinMember> result = jdbcTemplate.query(QueryFindDuplicateCall, new CallDuplicatedCheckMapper(), duplicateCall);
         return result;
     }
 }

@@ -48,7 +48,6 @@ public class MemberController {
     JoinMember deleteMember = memberService.memberInfoView((LoginMember)sessionData);
     model.addAttribute("idMember",deleteMember);
     return "memberView/MemberDelete";
-
     }
 
 
@@ -57,8 +56,10 @@ public class MemberController {
         if(!bindingResult.hasErrors()){
             memberService.joinOk(joinMember);
             model.addAttribute(joinMember);
+            log.info("회원가입 정상 실행");
             return "memberView/member";
         }else {
+            log.info("*-****************회원가입 오류 입니다");
             log.info("{}",bindingResult);
             return "memberView/Join";
         }

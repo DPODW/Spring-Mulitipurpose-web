@@ -10,7 +10,9 @@ public interface FindMemberRepository {
 
     List<JoinMember> findMemberUseLoginInfo(LoginMember loginMember);
 
-    List<JoinMember> findDuplicateId(String id);
+    List<JoinMember> findDuplicateId(String duplicateId);
+
+    List<JoinMember> findDuplicateCall(String duplicateCall);
 
 
 }
