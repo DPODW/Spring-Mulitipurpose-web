@@ -1,6 +1,7 @@
 package com.multipurpose.web.controller;
 
 import com.multipurpose.web.repository.SessionConst;
+import com.multipurpose.web.service.JoinCheckService;
 import com.multipurpose.web.service.MemberService;
 import com.multipurpose.web.vo.JoinMember;
 import com.multipurpose.web.vo.LoginMember;
@@ -22,6 +23,8 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
      private final MemberService memberService;
      private final LoginController loginController;
+
+     private final JoinCheckService joinCheckService;
 
 
     @GetMapping("/joins")
@@ -52,18 +55,25 @@ public class MemberController {
 
 
     @PostMapping("/joins")
-    public String join(@Validated @ModelAttribute JoinMember joinMember,BindingResult bindingResult,Model model){
-        if(!bindingResult.hasErrors()){
+    public String join(@Validated
+                       @ModelAttribute JoinMember joinMember,BindingResult bindingResult,Model model,
+                       @RequestParam("joinId") String joinId,@RequestParam("joinPwdCheck") String joinPwdCheck,
+                       @RequestParam("joinCall") String joinCall){
+        if(!bindingResult.hasErrors() &&
+                joinCheckService.duplicateIdCheck(joinId) &&
+                joinCheckService.comparePwdCheck(joinPwdCheck,joinMember.getJoinPwd()) &&
+                joinCheckService.duplicateCallCheck(joinCall) ){
+
             memberService.joinOk(joinMember);
             model.addAttribute(joinMember);
             log.info("회원가입 정상 실행");
             return "memberView/member";
         }else {
-            log.info("*-****************회원가입 오류 입니다");
-            log.info("{}",bindingResult);
+            bindingResult.reject("joinCheckFail");
             return "memberView/Join";
         }
     }
+
 
 
     @PostMapping("/member1")

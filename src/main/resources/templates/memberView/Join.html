@@ -10,6 +10,11 @@
             border-color: red;
             color: red;
         }
+
+        .object-error{
+            border-color: deeppink;
+            color: deeppink;
+        }
     </style>
     <script>    function validateInputId() {
         const input = document.getElementById("JoinId");
@@ -53,8 +58,9 @@
        <input th:text="#{id}" type="text" id="JoinId" name="joinId" placeholder="서버에 연결되어있나요?"  th:value="*{joinId}" th:placeholder="#{join.id}" maxlength="20"  >
        <sub th:text="#{join.id.sub}"></sub>
        <button type="submit" onclick="validateInputId()" th:formaction="|@{/userC/id}|">아이디 중복 체크</button>
+        <h3 th:errorclass="field-error" th:errors="*{joinId}"></h3>
         <h3 th:if="${joinId}" th:text="#{join.id.NotDuplicated}"></h3>
-        <h3 th:errorclass="field-error"  th:errors="*{joinId}"></h3>
+        <h3 class="object-error" th:if="${joinIdFail}"  th:text="#{Duplicated.joinId}"></h3>
    </p>
 
 
@@ -68,7 +74,8 @@
        <input th:text="#{pwd.check}" type="password" id="JoinPwdCheck" name="joinPwdCheck" placeholder="서버에 연결되어있나요?" th:value="*{joinPwdCheck}"  maxlength="20"  th:placeholder="#{pwd.check.ph}">
        <button type="submit" onclick="validateInputPwd()" th:formaction="|@{/userC/pwd}|">비밀번호 동일 체크</button>
         <h3 th:if="${joinPwdCheck}"  th:text="#{join.pwd.same}"></h3>
-        <h3 th:errorclass="field-error" th:errors="*{joinPwdCheck}"></h3>
+        <h3 class="object-error" th:if="${joinPwdCheckFail}"  th:text="#{NotSame.joinPwdCheck}"></h3>
+
    </p>
 
    <p >
@@ -76,9 +83,14 @@
        maxlength="11" id="JoinCall" placeholder="서버에 연결되어있나요?" th:field="*{joinCall}" th:placeholder="#{join.call}" >
        <sub th:text="#{join.call.sub}"></sub>
        <button type="submit" onclick="validateInputCall()"  th:formaction="|@{/userC/call}|">전화번호 중복 체크</button>
-        <h3 th:if="${joinCall}" th:text="#{join.call.NotDuplicated}"></h3>
         <h3 th:errorclass="field-error" th:errors="*{joinCall}"></h3>
+        <h3 th:if="${joinCall}" th:text="#{join.call.NotDuplicated}"></h3>
+        <h3 class="object-error" th:if="${joinCallFail}"  th:text="#{Duplicated.joinCall}"></h3>
    </p>
+
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <h3 th:text="#{joinCheckFail}"></h3>
+        </div>
    <p> <button type="submit" th:onclick="|location.href='@{/user/joins}'|">회원가입</button>
     </form>
 </body>
