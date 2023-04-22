@@ -10,7 +10,30 @@
             border-color: red;
             color: red;
         }
+        .object-error{
+            border-color: deeppink;
+            color: deeppink;
+        }
     </style>
+    <script>
+        function validateInputPwd() {
+            const input = document.getElementById("JoinPwdCheck");
+            if (input.value === "") {
+                alert("정보를 입력해주세요!");
+                event.preventDefault();
+            } else {
+            }
+        }
+
+        function validateInputCall() {
+            const input = document.getElementById("JoinCall");
+            if (input.value === "") {
+                alert("정보를 입력해주세요!");
+                event.preventDefault();
+            } else {
+            }
+        }
+    </script>
 </head>
 <body>
     <form th:action  th:object="${idMember}" method="post">
@@ -26,26 +49,35 @@
               th:placeholder="#{join.id}" th:field="*{joinId}" readonly></p>
 
    <p>
-       <input th:text="#{pwd}" type="password" id="Update-Pwd"  placeholder="서버에 연결되어있나요?" maxlength="20"
-              th:placeholder="#{join.pwd}" th:field="*{joinPwd}">
+       <input th:text="#{pwd}" type="password" id="Update-Pwd" name="joinPwd" placeholder="서버에 연결되어있나요?" maxlength="20"
+              th:placeholder="#{join.pwd}"  th:value="*{joinPwd}">
         <sub th:text="#{join.pwd.sub}"></sub>
         <h3 th:class="field-error" th:errors="*{joinPwd}"></h3>
    </p>
 
    <p>
-       <input th:text="#{pwd.check}" type="password" id="Update-PwdCheck" name="Update-pwdCheck" placeholder="비밀번호 동일 체크" maxlength="20"
-              th:placeholder="#{pwd.check.ph}"> <button type="submit" onclick="">비밀번호 동일 체크</button>
+       <input th:text="#{pwd.check}" type="password" id="Update-PwdCheck" name="joinPwdCheck" th:value="*{joinPwdCheck}"  placeholder="비밀번호 동일 체크" maxlength="20"
+              th:placeholder="#{pwd.check.ph}"> <button type="submit" name="buttonType" value="update"  onclick="validateInputPwd()"  th:formaction="|@{/userU/pwd}|">비밀번호 동일 체크</button>
+            <h3 th:if="${updatePwdCheck}"  th:text="#{join.pwd.same}"></h3>
+            <h3 class="object-error" th:if="${UpdatePwdCheckFail}"  th:text="#{NotSame.joinPwdCheck}"></h3>
    </p>
 
    <p>
        <input th:text="#{call}" type="text" id="Update-Call"  placeholder="서버에 연결되어있나요?"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+              maxlength="11"
               th:placeholder="#{join.call}" th:field="*{joinCall}">
         <sub th:text="#{join.call.sub}"></sub>
+        <button type="submit" onclick="validateInputCall()" name="buttonType" value="update" th:formaction="|@{/userU/call}|">전화번호 중복 체크</button>
         <h3 th:class="field-error" th:errors="*{joinCall}"></h3>
+        <h3 th:if="${joinCall}" th:text="#{join.call.NotDuplicated}"></h3>
+        <h3 class="object-error" th:if="${joinCallFail}"  th:text="#{Duplicated.joinCall}"></h3>
    </p>
-
-   <p><button type="submit" th:onclick="|location.href='@{/user/memberUpdate}'|">회원수정</button>
-   
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <h3 th:text="#{joinCheckFail}"></h3>
+        </div>
+   <p>
+       <button type="submit" th:onclick="|location.href='@{/user/memberUpdate}'|">회원수정</button>
     </form>
 </body>
 </html>

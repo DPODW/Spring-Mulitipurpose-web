@@ -46,7 +46,7 @@ public class JoinCheckController {
     @PostMapping("/pwd")
     public String pwdSameCheck(@Validated
                                @RequestParam("joinPwdCheck") String joinPwdCheck,
-                               @ModelAttribute JoinMember joinMember, BindingResult bindingResult,
+                               @ModelAttribute JoinMember joinMember,
                                RedirectAttributes redirectAttributes) {
         boolean sameCheck = joinCheckService.comparePwdCheck(joinPwdCheck, joinMember.getJoinPwd());
         if (sameCheck == true) {
@@ -55,8 +55,6 @@ public class JoinCheckController {
 
             return "redirect:/user/joins";
         } else {
-            log.info("{}",joinPwdCheck);
-            log.info("비밀번호가 동일하지 않습니다");
             redirectAttributes.addFlashAttribute("joinMember", joinMember);
             redirectAttributes.addFlashAttribute("joinPwdCheckFail", joinPwdCheck);
             return "redirect:/user/joins";
