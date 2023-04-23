@@ -34,6 +34,7 @@ public class MemberController {
         return "memberView/Join";
     }
 
+
     @GetMapping("/member1")
     public String memberUpdateForm(@RequestParam(required = false)String form, HttpServletRequest request, Model model){
         if(form == null){
@@ -102,7 +103,7 @@ public class MemberController {
 
 
     @PostMapping("/member2")
-    public String memberDelete(@Validated @ModelAttribute JoinMember deleteMember,BindingResult bindingResult,HttpServletRequest request,Model model){
+    public String memberDelete(@Validated @ModelAttribute JoinMember deleteMember,HttpServletRequest request){
         memberService.memberDelete(deleteMember);
         return loginController.logout(request); //회원 삭제시, 해당 세션도 삭제
     }

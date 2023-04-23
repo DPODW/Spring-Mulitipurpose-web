@@ -14,7 +14,7 @@
   <p><input th:text="#{id}" type="text" id="JoinId"  placeholder="서버에 연결되어있나요?"maxlength="20" th:field="*{joinId}"  disabled>
   <p><input th:text="#{pwd}" type="password" id="JoinPwd" name="joinPwd" placeholder="서버에 연결되어있나요?"maxlength="20" th:value="${idMember.getJoinPwd()}" disabled> </p>
   <p><input th:text="#{call}" type="text" id="JoinCall"  placeholder="서버에 연결되어있나요?" th:field="*{joinCall}"  disabled> </p>
-  <a th:href="@{/home/}">클릭시 홈으로</a>
+  <a th:href="@{/home/home1}">클릭시 홈으로</a>
 </form>
 </body>
 </html>
