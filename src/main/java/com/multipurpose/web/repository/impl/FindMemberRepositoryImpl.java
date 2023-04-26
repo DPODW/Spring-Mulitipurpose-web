@@ -24,6 +24,7 @@ public class FindMemberRepositoryImpl implements FindMemberRepository {
     public FindMemberRepositoryImpl(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
+
     @Override
     public List<JoinMember> findById(String id) {
         String QueryFindById = "select * from member where joinId=?";

@@ -11,6 +11,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,12 +28,13 @@ public class JoinCheckController {
 
 
     @PostMapping("/id")
-    public String idDuplicationCheck(@Validated
+    public String idDuplicationCheck(@SessionAttribute(required = false)
+                                     @Validated
                                      @RequestParam("joinId") String joinId,
-                                     @ModelAttribute JoinMember joinMember,RedirectAttributes redirectAttributes) {
+                                     @ModelAttribute JoinMember joinMember,RedirectAttributes redirectAttributes
+                                     ) {
         boolean duplicationCheckId = joinCheckService.duplicateIdCheck(joinId);
         if (duplicationCheckId == true) {
-            log.info("사용 가능한 아이디");
             redirectAttributes.addFlashAttribute("joinMember", joinMember);
             redirectAttributes.addFlashAttribute("joinId", joinId);
             return "redirect:/user/joins";
@@ -50,11 +54,13 @@ public class JoinCheckController {
                                RedirectAttributes redirectAttributes) {
         boolean sameCheck = joinCheckService.comparePwdCheck(joinPwdCheck, joinMember.getJoinPwd());
         if (sameCheck == true) {
+
             redirectAttributes.addFlashAttribute("joinMember", joinMember);
             redirectAttributes.addFlashAttribute("joinPwdCheck", joinPwdCheck);
 
             return "redirect:/user/joins";
         } else {
+
             redirectAttributes.addFlashAttribute("joinMember", joinMember);
             redirectAttributes.addFlashAttribute("joinPwdCheckFail", joinPwdCheck);
             return "redirect:/user/joins";
@@ -68,12 +74,12 @@ public class JoinCheckController {
                                        @ModelAttribute JoinMember joinMember,
                                        RedirectAttributes redirectAttributes) {
         boolean duplicateCheckCall = joinCheckService.duplicateCallCheck(joinCall);
-        if (duplicateCheckCall == true) {
+        if(duplicateCheckCall == true) {
             redirectAttributes.addFlashAttribute("joinMember", joinMember);
             redirectAttributes.addFlashAttribute("joinCall", joinCall);
             return "redirect:/user/joins";
         } else {
-            log.info("전화번호가 동일하지 않습니다.");
+            log.info("전화번호가 중복.");
             redirectAttributes.addFlashAttribute("joinMember", joinMember);
             redirectAttributes.addFlashAttribute("joinCallFail", joinCall);
             return "redirect:/user/joins";

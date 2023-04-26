@@ -18,6 +18,7 @@ public class LoginServiceImpl implements LoginService {
 
         @Override
         public List<LoginMember> loginCheck(LoginMember loginMember){
+
             return memberRepository.logins(loginMember);
     }
 }

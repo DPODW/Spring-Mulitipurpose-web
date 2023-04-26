@@ -1,13 +1,20 @@
 package com.multipurpose.web.controller;
 
+import com.multipurpose.web.repository.SessionConst;
+import com.multipurpose.web.service.LoginService;
+import com.multipurpose.web.vo.JoinMember;
+import com.multipurpose.web.vo.LoginMember;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -16,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeController {
 
     private final LoginController loginController;
+
+    private final LoginService loginService;
 
     @GetMapping("")
     /**
@@ -31,14 +40,19 @@ public class HomeController {
 
 
     @GetMapping("/home1")
-    public String homes(){
+    public String homes(HttpServletRequest request,LoginMember loginMember, Model model){
+        HttpSession session = request.getSession(false);
+
+        Object loginInfo = session.getAttribute(SessionConst.LOGIN_MEMBER);
+        List<LoginMember> loginMembers = loginService.loginCheck((LoginMember) loginInfo);
+
+        //현재 로그인 정보를 띄우기 위한 로직 . . . 서비스 쪽에 구현하는것이 좋을것 같다.
+        LoginMember loginMember1 = loginMembers.get(0);
+        loginMember.setLoginId(loginMember1.getLoginId());
+        loginMember.setLoginPwd(loginMember1.getLoginPwd());
+        
+        model.addAttribute("id",loginMember.getLoginId());
         return "homes/Home1";
-        /**
-         * 로그인 한 이용자만 볼수 있는 화면.
-         * 로그인 정보를 가져오는 Http 관련 속성이 구현되어있지 않음
-         * 구현 해야함
-         * ex) 수정 완료 시 -> 해당 화면으로 바로 전송(정보 가진 채로)
-         * */
     }
 
 }

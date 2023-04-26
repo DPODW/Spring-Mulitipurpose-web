@@ -39,7 +39,7 @@ public class MemberController {
     public String memberUpdateForm(@RequestParam(required = false)String form, HttpServletRequest request, Model model){
         if(form == null){
             log.info("form == null 조건문 안으로 들어옴");
-            HttpSession session = request.getSession();
+            HttpSession session = request.getSession(false);
             Object sessionData = session.getAttribute(SessionConst.LOGIN_MEMBER);
             JoinMember updateMember = memberService.memberInfoView((LoginMember)sessionData);
             model.addAttribute("idMember",updateMember);
@@ -52,12 +52,13 @@ public class MemberController {
 
     @GetMapping("/member2")
     public String memberDeleteForm(HttpServletRequest request, Model model){
-    HttpSession session = request.getSession();
+    HttpSession session = request.getSession(false);
     Object sessionData = session.getAttribute(SessionConst.LOGIN_MEMBER);
     JoinMember deleteMember = memberService.memberInfoView((LoginMember)sessionData);
     model.addAttribute("idMember",deleteMember);
     return "memberView/MemberDelete";
     }
+
 
 
     @PostMapping("/joins")
@@ -88,8 +89,7 @@ public class MemberController {
                                @RequestParam("joinCall") String joinCall,
                                Model model){
         if(!bindingResult.hasErrors() &&
-          joinCheckService.comparePwdCheck(joinPwdCheck,updateMember.getJoinPwd()) &&
-          joinCheckService.duplicateCallCheck(joinCall)) {
+          joinCheckService.comparePwdCheck(joinPwdCheck,updateMember.getJoinPwd())) {
 
             JoinMember memberUpdate = memberService.memberUpdate(updateMember);
             model.addAttribute("idMember",memberUpdate);
