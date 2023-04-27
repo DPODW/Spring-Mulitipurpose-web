@@ -36,7 +36,6 @@ public class LoginController {
             HttpSession session = request.getSession();
             session.setAttribute(SessionConst.LOGIN_MEMBER,loginMember);
             model.addAttribute("id",loginMember.getLoginId());
-            log.info("{}",session);
             return "homes/Home1";
         }else{
            log.info("아이디 없음");

@@ -14,5 +14,7 @@ public interface FindMemberRepository {
 
     List<JoinMember> findDuplicateCall(String duplicateCall);
 
+    List<JoinMember> findCallById(String existingCallId);
+
 
 }

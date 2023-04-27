@@ -1,8 +1,8 @@
 package com.multipurpose.web.repository.impl;
 
-import com.multipurpose.web.mapper.CallDuplicatedCheckMapper;
-import com.multipurpose.web.mapper.IdDuplicatedCheckMapper;
-import com.multipurpose.web.mapper.JoinMapper;
+import com.multipurpose.web.mapper.checkmapper.CallDuplicatedCheckMapper;
+import com.multipurpose.web.mapper.checkmapper.IdDuplicatedCheckMapper;
+import com.multipurpose.web.mapper.basicmapper.JoinMapper;
 import com.multipurpose.web.repository.FindMemberRepository;
 import com.multipurpose.web.vo.JoinMember;
 import com.multipurpose.web.vo.LoginMember;
@@ -18,6 +18,8 @@ import java.util.List;
 @Slf4j
 @Repository
 public class FindMemberRepositoryImpl implements FindMemberRepository {
+
+
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -52,6 +54,13 @@ public class FindMemberRepositoryImpl implements FindMemberRepository {
     public List<JoinMember> findDuplicateCall(String duplicateCall) {
         String QueryFindDuplicateCall = "select joinCall from member where joinCall=?";
         List<JoinMember> result = jdbcTemplate.query(QueryFindDuplicateCall, new CallDuplicatedCheckMapper(), duplicateCall);
+        return result;
+    }
+
+    @Override
+    public List<JoinMember> findCallById(String existingCallId) {
+        String QueryFindCallById = "select joinCall from member where joinId=?";
+        List<JoinMember> result = jdbcTemplate.query(QueryFindCallById,new CallDuplicatedCheckMapper(),existingCallId );
         return result;
     }
 }

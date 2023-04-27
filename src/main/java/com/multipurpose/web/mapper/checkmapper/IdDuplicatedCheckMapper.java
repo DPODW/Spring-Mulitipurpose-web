@@ -1,4 +1,4 @@
-package com.multipurpose.web.mapper;
+package com.multipurpose.web.mapper.checkmapper;
 
 import com.multipurpose.web.vo.JoinMember;
 import org.springframework.jdbc.core.RowMapper;

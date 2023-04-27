@@ -1,4 +1,4 @@
-package com.multipurpose.web.mapper;
+package com.multipurpose.web.mapper.basicmapper;
 
 import com.multipurpose.web.vo.LoginMember;
 import lombok.AllArgsConstructor;

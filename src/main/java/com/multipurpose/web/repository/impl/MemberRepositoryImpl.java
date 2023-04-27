@@ -1,8 +1,7 @@
 package com.multipurpose.web.repository.impl;
 
 
-import com.multipurpose.web.mapper.JoinMapper;
-import com.multipurpose.web.mapper.LoginMapper;
+import com.multipurpose.web.mapper.basicmapper.LoginMapper;
 import com.multipurpose.web.repository.MemberRepository;
 import com.multipurpose.web.vo.JoinMember;
 import com.multipurpose.web.vo.LoginMember;

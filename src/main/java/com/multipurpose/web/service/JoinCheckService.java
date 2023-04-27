@@ -12,4 +12,6 @@ public interface JoinCheckService {
 
     boolean duplicateCallCheck(String duplicatedCall);
 
+    boolean existingCallPermitCheck(String existingCall,String updateCall);
+
 }

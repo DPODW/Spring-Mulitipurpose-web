@@ -43,12 +43,13 @@ public class UpdateCheckController {
     }
 
 
+
     @PostMapping("/call")
     public String callDuplicationCheck(@Validated
                                        @RequestParam("joinCall") String updateCall,
                                        @ModelAttribute JoinMember idMember,
                                        RedirectAttributes redirectAttributes) {
-        if(joinCheckService.duplicateCallCheck(updateCall) == true) {
+        if(joinCheckService.duplicateCallCheck(updateCall) == true || joinCheckService.existingCallPermitCheck(idMember.getJoinId(),updateCall) == true) {
             redirectAttributes.addFlashAttribute("joinCall", updateCall);
         } else {
             redirectAttributes.addFlashAttribute("joinCallFail", updateCall);

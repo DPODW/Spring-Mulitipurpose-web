@@ -29,7 +29,13 @@ public class MemberController {
 
 
     @GetMapping("/joins")
-    public String joinForm(JoinMember joinMember , Model model){
+    public String joinForm(JoinMember joinMember , Model model,HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+
+            if(session != null){
+            }else{
+                log.info("세션 없음");
+            }
         model.addAttribute("joinMember", joinMember);
         return "memberView/Join";
     }
@@ -38,14 +44,11 @@ public class MemberController {
     @GetMapping("/member1")
     public String memberUpdateForm(@RequestParam(required = false)String form, HttpServletRequest request, Model model){
         if(form == null){
-            log.info("form == null 조건문 안으로 들어옴");
             HttpSession session = request.getSession(false);
             Object sessionData = session.getAttribute(SessionConst.LOGIN_MEMBER);
             JoinMember updateMember = memberService.memberInfoView((LoginMember)sessionData);
             model.addAttribute("idMember",updateMember);
-            log.info("{}",updateMember);
         }
-        log.info("form == null 조건문 안으로 안 들어옴");
         return "memberView/MemberUpdate";
     }
 
@@ -89,8 +92,9 @@ public class MemberController {
                                @RequestParam("joinCall") String joinCall,
                                Model model){
         if(!bindingResult.hasErrors() &&
-          joinCheckService.comparePwdCheck(joinPwdCheck,updateMember.getJoinPwd())) {
-
+          joinCheckService.comparePwdCheck(joinPwdCheck,updateMember.getJoinPwd()) &&
+          joinCheckService.existingCallPermitCheck(updateMember.getJoinId(),joinCall)
+          ) {
             JoinMember memberUpdate = memberService.memberUpdate(updateMember);
             model.addAttribute("idMember",memberUpdate);
             return "memberView/MemberUpdateOk";

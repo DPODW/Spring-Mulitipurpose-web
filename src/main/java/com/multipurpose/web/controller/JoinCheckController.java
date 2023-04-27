@@ -1,5 +1,6 @@
 package com.multipurpose.web.controller;
 
+import com.multipurpose.web.repository.SessionConst;
 import com.multipurpose.web.service.JoinCheckService;
 import com.multipurpose.web.vo.JoinMember;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,7 @@ public class JoinCheckController {
 
 
     @PostMapping("/id")
-    public String idDuplicationCheck(@SessionAttribute(required = false)
-                                     @Validated
+    public String idDuplicationCheck(@Validated
                                      @RequestParam("joinId") String joinId,
                                      @ModelAttribute JoinMember joinMember,RedirectAttributes redirectAttributes
                                      ) {
@@ -54,13 +54,10 @@ public class JoinCheckController {
                                RedirectAttributes redirectAttributes) {
         boolean sameCheck = joinCheckService.comparePwdCheck(joinPwdCheck, joinMember.getJoinPwd());
         if (sameCheck == true) {
-
             redirectAttributes.addFlashAttribute("joinMember", joinMember);
             redirectAttributes.addFlashAttribute("joinPwdCheck", joinPwdCheck);
-
             return "redirect:/user/joins";
         } else {
-
             redirectAttributes.addFlashAttribute("joinMember", joinMember);
             redirectAttributes.addFlashAttribute("joinPwdCheckFail", joinPwdCheck);
             return "redirect:/user/joins";
