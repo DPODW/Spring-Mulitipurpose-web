@@ -1,6 +1,7 @@
 package com.multipurpose.web.repository.boardrepository.impl;
 
 import com.multipurpose.web.mapper.boardmapper.BoardHomeMapper;
+import com.multipurpose.web.mapper.boardmapper.BoardMapper;
 import com.multipurpose.web.repository.boardrepository.FindBoardRepository;
 import com.multipurpose.web.vo.boardvo.Board;
 import lombok.extern.slf4j.Slf4j;
@@ -22,10 +23,18 @@ public class FindBoardRepositoryImpl implements FindBoardRepository {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+
+
     @Override
     public List<Board> findAll(Board board) {
         String QueryBoardFindAll = "select * from board";
-        List<Board> result = jdbcTemplate.query(QueryBoardFindAll, new BoardHomeMapper());
-        return result;
+        return jdbcTemplate.query(QueryBoardFindAll, new BoardHomeMapper());
+    }
+
+    @Override
+    public List<Board> findContent(String title) {
+        String QueryBoardFindContent = "select * from board where title=?";
+        log.info("{}", title);
+        return jdbcTemplate.query(QueryBoardFindContent, new BoardMapper(), title);
     }
 }

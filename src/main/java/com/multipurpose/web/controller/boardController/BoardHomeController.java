@@ -8,7 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,8 +26,17 @@ public class BoardHomeController {
     @GetMapping("")
     public String boardHome(Board board, Model model){
         List<Board> boardList = boardFindService.findAll(board);
-        model.addAttribute("boardList",boardList);
+        model.addAttribute("boardList", boardList);
         return "boards/BoardHome";
+    }
+
+    @GetMapping("/board")
+    public String boardContent(@RequestParam("title") String title, Model model){
+        log.info("{}",title);
+        List<Board> allContentList = boardFindService.findContent(title);
+        Board allContent = allContentList.get(0);
+        model.addAttribute("allContent",allContent);
+        return "boards/BoardContent";
     }
 
 }

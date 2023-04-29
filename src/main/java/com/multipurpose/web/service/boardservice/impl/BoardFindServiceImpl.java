@@ -22,4 +22,11 @@ public class BoardFindServiceImpl implements BoardFindService {
         /** 확장 가능  */
         return findBoardRepository.findAll(board);
     }
+
+    @Override
+    public List<Board> findContent(String title) {
+        log.info("{}",title);
+        return findBoardRepository.findContent(title);
+
+    }
 }

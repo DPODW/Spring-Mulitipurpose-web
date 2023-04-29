@@ -19,7 +19,7 @@
             <!-- 게시글 번호, 제목, 작성자 셋중 아무거나 클릭하여도 글 본문으로 이동 -->
             <tr th:each="board : ${boardList}">
                 <th th:text="${board.number}"></th>
-                <th th:text="${board.title}"></th>
+                <th> <a th:text="${board.title}" th:href="@{/boardHome/board(title=${board.title})}"></a></th>
                 <th th:text="${board.id}"></th>
                 <th><a th:href="@{/boards/board1}">수정</a></th>
                 <th><a th:href="@{/boards/board2}">삭제</a></th>

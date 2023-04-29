@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BoardFindService {
     List<Board> findAll (Board board);
+
+    List<Board> findContent (String title);
 }

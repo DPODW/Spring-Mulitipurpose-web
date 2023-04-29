@@ -7,4 +7,6 @@ import java.util.List;
 public interface FindBoardRepository {
 
     List<Board> findAll (Board board);
+
+    List<Board> findContent (String title);
 }
