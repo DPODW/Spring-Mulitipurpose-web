@@ -30,6 +30,7 @@ public class BoardHomeController {
         return "boards/BoardHome";
     }
 
+
     @GetMapping("/board")
     public String boardContent(@RequestParam("title") String title, Model model){
         log.info("{}",title);

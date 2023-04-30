@@ -2,12 +2,14 @@ package com.multipurpose.web.repository.boardrepository.impl;
 
 import com.multipurpose.web.repository.boardrepository.BoardRepository;
 import com.multipurpose.web.vo.boardvo.Board;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 
+@Slf4j
 @Repository
 public class BoardRepositoryImpl implements BoardRepository {
 
@@ -28,8 +30,10 @@ public class BoardRepositoryImpl implements BoardRepository {
     }
 
     @Override
-    public Board boardUpdate(Board board) {
-        return null;
+    public void boardUpdate(Board board) {
+        String queryUpdate = "update board set title=?, content=? where id=?";
+        Object[] args = {board.getTitle(),board.getContent(),board.getId()};
+        jdbcTemplate.update(queryUpdate,args);
     }
 
     @Override

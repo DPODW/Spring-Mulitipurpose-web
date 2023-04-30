@@ -21,4 +21,10 @@ public class BoardServiceImpl implements BoardService {
     public void writeInsert(Board board) {
         boardRepository.boardInsert(board);
     }
+
+
+    @Override
+    public void writeUpdate(Board board) {
+        boardRepository.boardUpdate(board);
+    }
 }

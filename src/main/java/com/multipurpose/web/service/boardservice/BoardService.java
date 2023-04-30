@@ -8,5 +8,6 @@ public interface BoardService {
 
     void writeInsert (Board board);
 
+    void writeUpdate (Board board);
 
 }

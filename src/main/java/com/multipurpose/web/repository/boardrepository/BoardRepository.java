@@ -6,7 +6,7 @@ public interface BoardRepository {
 
     Board boardInsert(Board board);
 
-    Board boardUpdate(Board board);
+    void boardUpdate(Board board);
 
     void boardDelete(Board board);
 }

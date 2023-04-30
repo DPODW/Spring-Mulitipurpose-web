@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
@@ -8,22 +9,27 @@
     <div id="board_write">
         <h4>글을 수정하는 공간입니다.</h4>
             <div id="write_area">
-                <form enctype="multipart/form-data" action="" method="post">
-                    <p> <input type="name" id="Update-name" name="Update-name" placeholder="이름" disabled> </p>
+                <form enctype="multipart/form-data" action method="post">
+                    <p>
+                    <h4>작성자↓ </h4>
+                    <textarea type="text" id="Update-name" name="id" th:text="${updateContent.id}"  placeholder="이름" readonly></textarea>
+                    </p>
                     <div id="in_title">
-                        <textarea name="Update-title" id="Update-title" rows="1" cols="55" placeholder="제목(30자 제한)" maxlength="30" required></textarea>
+                        <h4>제목↓  </h4>
+                        <textarea  id="Update-title" name="title" th:text="${updateContent.title}" rows="1" cols="55" placeholder="제목(30자 제한)" maxlength="30" required></textarea>
                     </div>
  
                     <div class="wi_line"></div>
                     <div id="in_content">
-                        <textarea rows="10" cols="55" name="Update-content" id="Update-content" placeholder="내용(100자 제한)" maxlength="100" required></textarea>
+                        <h4>본문↓  </h4>
+                        <textarea rows="10" cols="55" name="content" id="Update-content" th:text="${updateContent.content}" placeholder="내용(100자 제한)" maxlength="100" required></textarea>
                     </div>
  
                       <input type="file" name="SelectFile" />
  
  
                     <div class="bt_se">
-                        <button type="submit">글 수정</button>
+                        <button type="submit" th:href="@{/boards/board1}">글 수정</button>
                     </div>
                 </form>
             </div>

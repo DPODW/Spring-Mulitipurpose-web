@@ -21,7 +21,7 @@
                 <th th:text="${board.number}"></th>
                 <th> <a th:text="${board.title}" th:href="@{/boardHome/board(title=${board.title})}"></a></th>
                 <th th:text="${board.id}"></th>
-                <th><a th:href="@{/boards/board1}">수정</a></th>
+                <th><a th:href="@{/boards/board1(title=${board.title})}">수정</a></th>
                 <th><a th:href="@{/boards/board2}">삭제</a></th>
             </tr>
                <!--타임리프 반복문 필요-->
