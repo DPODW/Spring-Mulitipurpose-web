@@ -31,8 +31,8 @@ public class BoardRepositoryImpl implements BoardRepository {
 
     @Override
     public void boardUpdate(Board board) {
-        String queryUpdate = "update board set title=?, content=? where id=?";
-        Object[] args = {board.getTitle(),board.getContent(),board.getId()};
+        String queryUpdate = "update board set content=?, title=? where id=?";
+        Object[] args = {board.getContent(),board.getTitle(),board.getId()};
         jdbcTemplate.update(queryUpdate,args);
     }
 

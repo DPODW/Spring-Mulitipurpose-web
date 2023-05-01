@@ -38,8 +38,8 @@ public class BoardController {
     }
 
 
-    @GetMapping("/board1")
-    public String updateBoardForm(@RequestParam("title") String title, Model model){
+    @GetMapping("/board1/{title}")
+    public String updateBoardForm(@PathVariable("title") String title, Model model,HttpServletRequest request){
         List<Board> updateContentList = boardFindService.findContent(title);
         Board updateContent = updateContentList.get(0);
         model.addAttribute("updateContent",updateContent);
@@ -63,6 +63,7 @@ public class BoardController {
 
     @PostMapping("/board1")
     public String updateBoard(@ModelAttribute Board board){
+
         boardService.writeUpdate(board);
         return "redirect:/boardHome";
     }

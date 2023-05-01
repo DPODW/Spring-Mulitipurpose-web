@@ -31,8 +31,8 @@ public class BoardHomeController {
     }
 
 
-    @GetMapping("/board")
-    public String boardContent(@RequestParam("title") String title, Model model){
+    @GetMapping("/board/{title}")
+    public String boardContent(@PathVariable("title") String title, Model model){
         log.info("{}",title);
         List<Board> allContentList = boardFindService.findContent(title);
         Board allContent = allContentList.get(0);
