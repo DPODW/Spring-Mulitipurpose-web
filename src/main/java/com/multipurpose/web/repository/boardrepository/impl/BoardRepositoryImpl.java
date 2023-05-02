@@ -37,7 +37,8 @@ public class BoardRepositoryImpl implements BoardRepository {
     }
 
     @Override
-    public void boardDelete(Board board) {
-
+    public void boardDelete(String title) {
+        String queryDelete = "delete from board where title=?";
+        jdbcTemplate.update(queryDelete,title);
     }
 }

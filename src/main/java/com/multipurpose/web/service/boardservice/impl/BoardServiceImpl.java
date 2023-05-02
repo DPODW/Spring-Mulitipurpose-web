@@ -22,9 +22,13 @@ public class BoardServiceImpl implements BoardService {
         boardRepository.boardInsert(board);
     }
 
-
     @Override
     public void writeUpdate(Board board) {
         boardRepository.boardUpdate(board);
+    }
+
+    @Override
+    public void writeDelete(String title) {
+        boardRepository.boardDelete(title);
     }
 }

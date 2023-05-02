@@ -8,5 +8,5 @@ public interface BoardRepository {
 
     void boardUpdate(Board board);
 
-    void boardDelete(Board board);
+    void boardDelete(String title);
 }

@@ -39,7 +39,7 @@ public class BoardController {
 
 
     @GetMapping("/board1/{title}")
-    public String updateBoardForm(@PathVariable("title") String title, Model model,HttpServletRequest request){
+    public String updateBoardForm(@PathVariable("title") String title, Model model){
         List<Board> updateContentList = boardFindService.findContent(title);
         Board updateContent = updateContentList.get(0);
         model.addAttribute("updateContent",updateContent);
@@ -47,15 +47,17 @@ public class BoardController {
     }
 
 
-    @GetMapping("/board2")
-    public String deleteBoardForm(){
-
+    @GetMapping("/board2/{title}")
+    public String deleteBoardForm(@PathVariable("title") String title, Model model){
+        List<Board> deleteContentList = boardFindService.findContent(title);
+        Board deleteContent = deleteContentList.get(0);
+        model.addAttribute("deleteContent",deleteContent);
         return "boards/BoardDelete";
     }
 
 
     @PostMapping("")
-    public String writeBoard(@ModelAttribute Board board, Model model){
+    public String writeBoard(@ModelAttribute Board board){
         boardService.writeInsert(board);
         return "redirect:/boardHome";
     }
@@ -63,10 +65,13 @@ public class BoardController {
 
     @PostMapping("/board1")
     public String updateBoard(@ModelAttribute Board board){
-
         boardService.writeUpdate(board);
         return "redirect:/boardHome";
     }
 
-
+    @PostMapping("/board2")
+    public String deleteBoard(@RequestParam("title") String title){
+        boardService.writeDelete(title);
+        return "redirect:/boardHome";
+    }
 }

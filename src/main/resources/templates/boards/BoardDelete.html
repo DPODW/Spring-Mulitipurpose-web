@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
@@ -8,6 +9,11 @@
     <style>
         textarea:disabled{
             background-color: white;
+
+        }
+        a{
+            text-decoration-line: none;
+            color: black;
         }
 
     </style>
@@ -15,23 +21,29 @@
         <h4>해당 글을 삭제하시겠습니까?</h4>
         <h4>글 본문</h4>
             <div id="write_area">
-                <form enctype="multipart/form-data" action="" method="post">
-                    <p> <input type="name" id="WriterName" name="Content-name" placeholder="이름" readonly> </p>
+                <form enctype="multipart/form-data" th:action="@{/boards/board2}" method="post">
+                    <p>
+                         <h4>작성자↓ </h4>
+                    <textarea type="name" id="WriterName" name="id" th:text="${deleteContent.id}" placeholder="이름" readonly> </textarea>
+                    </p>
+
                     <div id="in_title">
-                        <textarea  id="utitle" name="Content-title" rows="1" cols="55" placeholder="제목(30자 제한)" maxlength="30" readonly></textarea>
+                        <h4>제목↓  </h4>
+                        <textarea  id="utitle" name="title" rows="1" cols="55"  th:text="${deleteContent.title}" placeholder="제목(30자 제한)" maxlength="30" readonly></textarea>
                     </div>
  
                     <div class="wi_line"></div>
                     <div id="in_content">
-                        <textarea rows="10" cols="55" name="content" id="Content-content" placeholder="내용(100자 제한)" maxlength="100" readonly></textarea>
+                        <h4>본문↓  </h4>
+                        <textarea rows="10" cols="55" name="content" id="content"  th:text="${deleteContent.content}" placeholder="내용(100자 제한)" maxlength="100" readonly></textarea>
                     </div>
- 
+
                       <input type="file" name="SelectFile" readonly/>
-                    <div class="bt_se">A
+                    <div class="bt_se">
                         <button type="submit">게시글 삭제</button>
-                        <button type="submit">게시글 홈으로</button>
                     </div>
                 </form>
+                <a th:href="@{/boardHome/}">게시글 홈으로</a>
             </div>
         </div>
     </body>
