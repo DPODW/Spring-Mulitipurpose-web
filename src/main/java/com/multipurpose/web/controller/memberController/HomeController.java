@@ -1,9 +1,8 @@
-package com.multipurpose.web.controller;
+package com.multipurpose.web.controller.memberController;
 
-import com.multipurpose.web.repository.SessionConst;
-import com.multipurpose.web.service.LoginService;
-import com.multipurpose.web.vo.JoinMember;
-import com.multipurpose.web.vo.LoginMember;
+import com.multipurpose.web.repository.memberrepository.SessionConst;
+import com.multipurpose.web.service.memberservice.LoginService;
+import com.multipurpose.web.vo.membervo.LoginMember;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

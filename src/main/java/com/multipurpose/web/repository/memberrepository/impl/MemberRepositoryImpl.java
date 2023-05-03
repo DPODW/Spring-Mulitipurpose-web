@@ -1,10 +1,10 @@
-package com.multipurpose.web.repository.impl;
+package com.multipurpose.web.repository.memberrepository.impl;
 
 
-import com.multipurpose.web.mapper.basicmapper.LoginMapper;
-import com.multipurpose.web.repository.MemberRepository;
-import com.multipurpose.web.vo.JoinMember;
-import com.multipurpose.web.vo.LoginMember;
+import com.multipurpose.web.mapper.membermapper.basicmapper.LoginMapper;
+import com.multipurpose.web.repository.memberrepository.MemberRepository;
+import com.multipurpose.web.vo.membervo.JoinMember;
+import com.multipurpose.web.vo.membervo.LoginMember;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

@@ -1,8 +1,8 @@
-package com.multipurpose.web.service.impl;
+package com.multipurpose.web.service.memberservice.impl;
 
-import com.multipurpose.web.repository.FindMemberRepository;
-import com.multipurpose.web.service.JoinCheckService;
-import com.multipurpose.web.vo.JoinMember;
+import com.multipurpose.web.repository.memberrepository.FindMemberRepository;
+import com.multipurpose.web.service.memberservice.JoinCheckService;
+import com.multipurpose.web.vo.membervo.JoinMember;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

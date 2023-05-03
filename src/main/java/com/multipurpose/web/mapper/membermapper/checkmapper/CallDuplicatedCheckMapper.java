@@ -1,20 +1,17 @@
-package com.multipurpose.web.mapper.basicmapper;
+package com.multipurpose.web.mapper.membermapper.checkmapper;
 
-
-import com.multipurpose.web.vo.JoinMember;
+import com.multipurpose.web.vo.membervo.JoinMember;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class JoinMapper implements RowMapper {
+public class CallDuplicatedCheckMapper implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
         JoinMember joinMember = new JoinMember();
-        joinMember.setJoinName(rs.getString("joinName"));
-        joinMember.setJoinId(rs.getString("joinId"));
-        joinMember.setJoinPwd(rs.getString("joinPwd"));
         joinMember.setJoinCall(rs.getString("joinCall"));
         return joinMember;
     }
+
 }

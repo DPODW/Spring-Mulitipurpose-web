@@ -1,4 +1,4 @@
-package com.multipurpose.web.vo;
+package com.multipurpose.web.vo.membervo;
 
 import lombok.Data;
 

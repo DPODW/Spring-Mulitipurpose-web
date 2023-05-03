@@ -1,11 +1,11 @@
-package com.multipurpose.web.repository.impl;
+package com.multipurpose.web.repository.memberrepository.impl;
 
-import com.multipurpose.web.mapper.checkmapper.CallDuplicatedCheckMapper;
-import com.multipurpose.web.mapper.checkmapper.IdDuplicatedCheckMapper;
-import com.multipurpose.web.mapper.basicmapper.JoinMapper;
-import com.multipurpose.web.repository.FindMemberRepository;
-import com.multipurpose.web.vo.JoinMember;
-import com.multipurpose.web.vo.LoginMember;
+import com.multipurpose.web.mapper.membermapper.checkmapper.CallDuplicatedCheckMapper;
+import com.multipurpose.web.mapper.membermapper.checkmapper.IdDuplicatedCheckMapper;
+import com.multipurpose.web.mapper.membermapper.basicmapper.JoinMapper;
+import com.multipurpose.web.repository.memberrepository.FindMemberRepository;
+import com.multipurpose.web.vo.membervo.JoinMember;
+import com.multipurpose.web.vo.membervo.LoginMember;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

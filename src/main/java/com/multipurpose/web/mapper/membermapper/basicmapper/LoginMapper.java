@@ -1,12 +1,7 @@
-package com.multipurpose.web.mapper.basicmapper;
+package com.multipurpose.web.mapper.membermapper.basicmapper;
 
-import com.multipurpose.web.vo.LoginMember;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.multipurpose.web.vo.membervo.LoginMember;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

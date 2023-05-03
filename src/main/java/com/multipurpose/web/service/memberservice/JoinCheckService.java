@@ -1,8 +1,4 @@
-package com.multipurpose.web.service;
-
-import com.multipurpose.web.vo.JoinMember;
-
-import java.util.List;
+package com.multipurpose.web.service.memberservice;
 
 public interface JoinCheckService {
 

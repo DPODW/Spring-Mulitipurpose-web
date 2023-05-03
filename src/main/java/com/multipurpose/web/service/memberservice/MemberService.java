@@ -1,7 +1,7 @@
-package com.multipurpose.web.service;
+package com.multipurpose.web.service.memberservice;
 
-import com.multipurpose.web.vo.JoinMember;
-import com.multipurpose.web.vo.LoginMember;
+import com.multipurpose.web.vo.membervo.JoinMember;
+import com.multipurpose.web.vo.membervo.LoginMember;
 
 public interface MemberService {
 

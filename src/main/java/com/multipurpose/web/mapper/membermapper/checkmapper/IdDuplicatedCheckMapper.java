@@ -1,6 +1,6 @@
-package com.multipurpose.web.mapper.checkmapper;
+package com.multipurpose.web.mapper.membermapper.checkmapper;
 
-import com.multipurpose.web.vo.JoinMember;
+import com.multipurpose.web.vo.membervo.JoinMember;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

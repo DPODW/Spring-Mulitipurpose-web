@@ -1,4 +1,5 @@
 <!doctype html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
@@ -21,15 +22,15 @@
             <tr>
                 <th onclick="">1</th>
                 <th onclick="">[html 더미 데이터]</th>
-                <th onclick="">[더미 데이터]</th> 
-                <th><a href="">삭제</a></th>
-                <th><a href="">수정</a></th>
+                <th onclick="">[더미 데이터]</th>
+                <th><a th:href="@{/boards/board1}">수정</a></th>
+                <th><a th:href="@{/boards/board2}">삭제</a></th>
             </tr>
                <!--타임리프 반복문 필요-->
         </thead>
     </table>
     <div id="write_btn">
-      <a href=""><button>글쓰기</button></a>
+      <a th:href="@{/boards/}"><button>글쓰기</button></a>
     </div>
   </div>
 </body>

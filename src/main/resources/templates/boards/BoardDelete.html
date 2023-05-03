@@ -12,12 +12,13 @@
 
     </style>
     <div id="board_write">
+        <h4>해당 글을 삭제하시겠습니까?</h4>
         <h4>글 본문</h4>
             <div id="write_area">
                 <form enctype="multipart/form-data" action="" method="post">
                     <p> <input type="name" id="WriterName" name="Content-name" placeholder="이름" readonly> </p>
                     <div id="in_title">
-                        <textarea name="title" id="utitle" name="Content-title" rows="1" cols="55" placeholder="제목(30자 제한)" maxlength="30" readonly></textarea>
+                        <textarea  id="utitle" name="Content-title" rows="1" cols="55" placeholder="제목(30자 제한)" maxlength="30" readonly></textarea>
                     </div>
  
                     <div class="wi_line"></div>
@@ -26,9 +27,8 @@
                     </div>
  
                       <input type="file" name="SelectFile" readonly/>
- 
- 
-                    <div class="bt_se">
+                    <div class="bt_se">A
+                        <button type="submit">게시글 삭제</button>
                         <button type="submit">게시글 홈으로</button>
                     </div>
                 </form>

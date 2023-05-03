@@ -1,19 +1,14 @@
-package com.multipurpose.web.controller;
+package com.multipurpose.web.controller.memberController;
 
-import com.multipurpose.web.repository.SessionConst;
-import com.multipurpose.web.service.JoinCheckService;
-import com.multipurpose.web.vo.JoinMember;
+import com.multipurpose.web.service.memberservice.JoinCheckService;
+import com.multipurpose.web.vo.membervo.JoinMember;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 
 @Slf4j

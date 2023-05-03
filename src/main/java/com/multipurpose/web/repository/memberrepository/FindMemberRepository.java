@@ -1,7 +1,7 @@
-package com.multipurpose.web.repository;
+package com.multipurpose.web.repository.memberrepository;
 
-import com.multipurpose.web.vo.JoinMember;
-import com.multipurpose.web.vo.LoginMember;
+import com.multipurpose.web.vo.membervo.JoinMember;
+import com.multipurpose.web.vo.membervo.LoginMember;
 
 import java.util.List;
 
