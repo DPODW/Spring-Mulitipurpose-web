@@ -6,13 +6,13 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
-public class board {
+public class Board {
 
 
-    private int number;
+    private Integer number;
 
     @NotBlank
-    private String name;
+    private String id;
 
     @NotBlank
     @Size(min=3, max= 30)
@@ -22,9 +22,9 @@ public class board {
     @Size(min=5, max= 100)
     private String content;
 
-    public board(int number, String name, String title, String content) {
+    public Board(Integer number, String id, String title, String content) {
         this.number = number;
-        this.name = name;
+        this.id = id;
         this.title = title;
         this.content = content;
     }
