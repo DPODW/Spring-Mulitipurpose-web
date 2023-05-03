@@ -47,9 +47,6 @@ public class JoinCheckServiceImpl implements JoinCheckService {
         List<JoinMember> beforeCallNumber = findMemberRepository.findCallById(existingCallId);
         JoinMember extractedCall = (JoinMember) beforeCallNumber.get(0);
         String joinCall = extractedCall.getJoinCall();
-
-        log.info("beforeNumber 이름{}",joinCall);
-        log.info("existingCall  이름{}",updateCall);
         if(joinCall.equals(updateCall)){
             return true;
         }else{
