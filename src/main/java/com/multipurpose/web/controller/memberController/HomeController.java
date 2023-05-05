@@ -34,6 +34,10 @@ public class HomeController {
         response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
         response.setHeader("Expires", "0"); // Proxies.
         HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+            log.info("메인 화면. 세션이 존재하여서 삭제하였습니다. ");
+        }
         return "homes/Homes";
     }
 
