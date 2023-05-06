@@ -2,6 +2,7 @@ package com.multipurpose.web.controller.boardController;
 
 
 import com.multipurpose.web.repository.memberrepository.SessionConst;
+import com.multipurpose.web.service.boardservice.BoardCheckService;
 import com.multipurpose.web.service.boardservice.BoardFindService;
 import com.multipurpose.web.service.boardservice.BoardService;
 import com.multipurpose.web.vo.boardvo.Board;
@@ -26,6 +27,8 @@ public class BoardController {
     private final BoardService boardService;
     private final BoardFindService boardFindService;
 
+    private final BoardCheckService boardCheckService;
+
     /**
      * 접근 컨트롤러
      * */
@@ -38,21 +41,35 @@ public class BoardController {
     }
 
 
-    @GetMapping("/board1/{title}")
-    public String updateBoardForm(@PathVariable("title") String title, Model model){
-        List<Board> updateContentList = boardFindService.findContent(title);
-        Board updateContent = updateContentList.get(0);
-        model.addAttribute("updateContent",updateContent);
-        return "boards/BoardUpdate";
+    @GetMapping("/board1/{title}/{id}")
+    public String updateBoardForm(@PathVariable("title") String title, @PathVariable("id") String id,
+                                  HttpServletRequest request, Model model){
+        HttpSession session = request.getSession(false);
+        LoginMember updaterInfo = (LoginMember) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if(boardCheckService.accessCheck(id,updaterInfo.getLoginId())==true){
+            List<Board> updateContentList = boardFindService.findContent(title);
+            Board updateContent = updateContentList.get(0);
+            model.addAttribute("updateContent",updateContent);
+            return "boards/BoardUpdate";
+        } else {
+            return "redirect:/boardHome";
+        }
     }
 
 
-    @GetMapping("/board2/{title}")
-    public String deleteBoardForm(@PathVariable("title") String title, Model model){
-        List<Board> deleteContentList = boardFindService.findContent(title);
-        Board deleteContent = deleteContentList.get(0);
-        model.addAttribute("deleteContent",deleteContent);
-        return "boards/BoardDelete";
+    @GetMapping("/board2/{title}/{id}")
+    public String deleteBoardForm(@PathVariable("title") String title, @PathVariable("id") String id,
+                                  HttpServletRequest request, Model model){
+        HttpSession session = request.getSession(false);
+        LoginMember deleterInfo = (LoginMember) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        if(boardCheckService.accessCheck(id,deleterInfo.getLoginId())==true){
+            List<Board> deleteContentList = boardFindService.findContent(title);
+            Board deleteContent = deleteContentList.get(0);
+            model.addAttribute("deleteContent",deleteContent);
+            return "boards/BoardDelete";
+        }else{
+            return "redirect:/boardHome";
+        }
     }
 
 
