@@ -31,14 +31,14 @@ public class BoardRepositoryImpl implements BoardRepository {
 
     @Override
     public void boardUpdate(Board board) {
-        String queryUpdate = "update board set content=?, title=? where id=?";
-        Object[] args = {board.getContent(),board.getTitle(),board.getId()};
+        String queryUpdate = "update board set content=?, title=? where number=?";
+        Object[] args = {board.getContent(),board.getTitle(),board.getNumber()};
         jdbcTemplate.update(queryUpdate,args);
     }
 
     @Override
-    public void boardDelete(String title) {
-        String queryDelete = "delete from board where title=?";
-        jdbcTemplate.update(queryDelete,title);
+    public void boardDelete(Integer number) {
+        String queryDelete = "delete from board where number=?";
+        jdbcTemplate.update(queryDelete,number);
     }
 }

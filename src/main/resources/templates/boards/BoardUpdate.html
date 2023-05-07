@@ -3,15 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-    <script>
-        function updateBoard() {
-            // 현재 URL에서 쿼리 파라미터를 제거한 새로운 URL 생성
-            var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-
-            // 새로운 URL로 이동
-            window.location.replace(newUrl);
-        }
-    </script>
 </head>
 <body>
 <style>
@@ -26,24 +17,24 @@
         <h4>글을 수정하는 공간입니다.</h4>
             <div id="write_area">
                 <form method="post" th:action="@{/boards/board1}">
+                    <input type="hidden" id="number" name="number" th:value="${updateContent.number}"/>
                     <p>
                     <h4>작성자↓ </h4>
-                    <textarea type="text" id="Update-name" name="id" th:text="${updateContent.getId()}"  placeholder="이름" readonly></textarea>
+                    <textarea type="text" id="Update-name" name="id" th:text="${updateContent.id}"  placeholder="이름" readonly></textarea>
                     </p>
                     <div id="in_title">
                         <h4>제목↓  </h4>
-                        <textarea  id="Update-title" name="title" th:text="${updateContent.getTitle()}" rows="1" cols="55" placeholder="제목(30자 제한)" maxlength="30" required></textarea>
+                        <textarea  id="Update-title" name="title" th:text="${updateContent.title}" rows="1" cols="55" placeholder="제목(30자 제한)" maxlength="30" required></textarea>
                     </div>
  
                     <div class="wi_line"></div>
                     <div id="in_content">
                         <h4>본문↓  </h4>
-                        <textarea rows="10" cols="55" name="content" id="Update-content" th:text="${updateContent.getContent()}" placeholder="내용(100자 제한)" maxlength="100" required></textarea>
+                        <textarea rows="10" cols="55" name="content" id="Update-content" th:text="${updateContent.content}" placeholder="내용(100자 제한)" maxlength="100" required></textarea>
                     </div>
  
                       <input type="file" name="SelectFile" />
 
-<!--                    th:onclick="|location.href='@{/boards/board1}'|"-->
                     <div class="bt_se">
                         <button type="submit">글 수정</button>
                     </div>

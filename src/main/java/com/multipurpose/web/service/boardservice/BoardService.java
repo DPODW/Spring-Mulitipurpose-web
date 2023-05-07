@@ -10,6 +10,6 @@ public interface BoardService {
 
     void writeUpdate (Board board);
 
-    void writeDelete (String title);
+    void writeDelete (Integer number);
 
 }

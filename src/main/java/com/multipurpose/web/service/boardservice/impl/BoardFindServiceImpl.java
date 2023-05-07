@@ -19,14 +19,11 @@ public class BoardFindServiceImpl implements BoardFindService {
 
     @Override
     public List<Board> findAll(Board board) {
-        /** 확장 가능  */
         return findBoardRepository.findAll(board);
     }
 
     @Override
-    public List<Board> findContent(String title) {
-        log.info("{}",title);
-        return findBoardRepository.findContent(title);
-
+    public List<Board> findContent(Integer number) {
+        return findBoardRepository.findContent(number);
     }
 }

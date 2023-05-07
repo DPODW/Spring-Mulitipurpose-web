@@ -32,9 +32,9 @@ public class FindBoardRepositoryImpl implements FindBoardRepository {
     }
 
     @Override
-    public List<Board> findContent(String title) {
-        String QueryBoardFindContent = "select * from board where title=?";
-        log.info("{}", title);
-        return jdbcTemplate.query(QueryBoardFindContent, new BoardMapper(), title);
+    public List<Board> findContent(Integer number) {
+        String QueryBoardFindContent = "select * from board where number=?";
+        log.info("{}", number);
+        return jdbcTemplate.query(QueryBoardFindContent, new BoardMapper(), number);
     }
 }

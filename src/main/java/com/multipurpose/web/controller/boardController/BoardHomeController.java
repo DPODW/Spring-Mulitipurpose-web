@@ -39,10 +39,10 @@ public class BoardHomeController {
     }
 
 
-    @GetMapping("/board/{title}")
-    public String boardContent(@PathVariable("title") String title, Model model){
-        log.info("{}",title);
-        List<Board> allContentList = boardFindService.findContent(title);
+    @GetMapping("/board/{number}")
+    public String boardContent(@PathVariable("number") Integer number, Model model){
+        log.info("{}",number);
+        List<Board> allContentList = boardFindService.findContent(number);
         Board allContent = allContentList.get(0);
         model.addAttribute("allContent",allContent);
         return "boards/BoardContent";

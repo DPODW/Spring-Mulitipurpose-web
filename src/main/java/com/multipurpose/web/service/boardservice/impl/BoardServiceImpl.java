@@ -28,7 +28,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void writeDelete(String title) {
-        boardRepository.boardDelete(title);
+    public void writeDelete(Integer number) {
+        boardRepository.boardDelete(number);
     }
 }

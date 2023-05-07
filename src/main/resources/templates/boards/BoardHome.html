@@ -16,8 +16,8 @@
 <div id="board_area"> 
   <h1>자유게시판</h1>
   <h4>자유롭게 글을 쓸 수 있는 게시판입니다.</h4>
-  <h4>게시글 제목 클릭시 본문을 확인할수 있습니다.</h4>
-  <h4>본인이 게시한 게시물만 수정 , 삭제 등의 접근이 가능합니다.</h4>
+  <h4 style="color: green">게시글 제목 클릭시 본문을 확인할수 있습니다.</h4>
+  <h4 style="color: red">본인이 게시한 게시물만 수정 , 삭제 등의 접근이 가능합니다.</h4>
   <h4 th:text=" '현재 접속중인 아이디: ' + ${writerInfo}"></h4>
     <table class="list-table">
 
@@ -30,10 +30,10 @@
             <!-- 게시글 번호, 제목, 작성자 셋중 아무거나 클릭하여도 글 본문으로 이동 -->
             <tr th:each="board : ${boardList}">
                 <th th:text="${board.number}"></th>
-                <th> <a th:text="${board.title}" th:href="@{/boardHome/board/{title}(title=${board.title})}"></a></th>
+                <th> <a th:text="${board.title}" th:href="@{/boardHome/board/{number}(number=${board.number})}"></a></th>
                 <th th:text="${board.id}"></th>
-                <th><a th:href="@{/boards/board1/{title}/{id}(title=${board.title}, id=${board.id})}">수정</a></th>
-                <th><a th:href="@{/boards/board2/{title}/{id}(title=${board.title}, id=${board.id})}">삭제</a></th>
+                <th><a th:href="@{/boards/board1/{number}/{id}(number=${board.number}, id=${board.id})}">수정</a></th>
+                <th><a th:href="@{/boards/board2/{number}/{id}(number=${board.number}, id=${board.id})}">삭제</a></th>
             </tr>
                <!--타임리프 반복문 필요-->
 

@@ -8,5 +8,5 @@ public interface FindBoardRepository {
 
     List<Board> findAll (Board board);
 
-    List<Board> findContent (String title);
+    List<Board> findContent (Integer number);
 }

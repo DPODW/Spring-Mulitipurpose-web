@@ -30,12 +30,6 @@ public class MemberController {
 
     @GetMapping("/joins")
     public String joinForm(JoinMember joinMember , Model model,HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-
-            if(session != null){
-            }else{
-                log.info("세션 없음");
-            }
         model.addAttribute("joinMember", joinMember);
         return "memberView/Join";
     }

@@ -41,13 +41,13 @@ public class BoardController {
     }
 
 
-    @GetMapping("/board1/{title}/{id}")
-    public String updateBoardForm(@PathVariable("title") String title, @PathVariable("id") String id,
+    @GetMapping("/board1/{number}/{id}")
+    public String updateBoardForm(@PathVariable("number") Integer number, @PathVariable("id") String id,
                                   HttpServletRequest request, Model model){
         HttpSession session = request.getSession(false);
         LoginMember updaterInfo = (LoginMember) session.getAttribute(SessionConst.LOGIN_MEMBER);
         if(boardCheckService.accessCheck(id,updaterInfo.getLoginId())==true){
-            List<Board> updateContentList = boardFindService.findContent(title);
+            List<Board> updateContentList = boardFindService.findContent(number);
             Board updateContent = updateContentList.get(0);
             model.addAttribute("updateContent",updateContent);
             return "boards/BoardUpdate";
@@ -57,13 +57,13 @@ public class BoardController {
     }
 
 
-    @GetMapping("/board2/{title}/{id}")
-    public String deleteBoardForm(@PathVariable("title") String title, @PathVariable("id") String id,
+    @GetMapping("/board2/{number}/{id}")
+    public String deleteBoardForm(@PathVariable("number") Integer number, @PathVariable("id") String id,
                                   HttpServletRequest request, Model model){
         HttpSession session = request.getSession(false);
         LoginMember deleterInfo = (LoginMember) session.getAttribute(SessionConst.LOGIN_MEMBER);
         if(boardCheckService.accessCheck(id,deleterInfo.getLoginId())==true){
-            List<Board> deleteContentList = boardFindService.findContent(title);
+            List<Board> deleteContentList = boardFindService.findContent(number);
             Board deleteContent = deleteContentList.get(0);
             model.addAttribute("deleteContent",deleteContent);
             return "boards/BoardDelete";
@@ -86,9 +86,11 @@ public class BoardController {
         return "redirect:/boardHome";
     }
 
+
     @PostMapping("/board2")
-    public String deleteBoard(@RequestParam("title") String title){
-        boardService.writeDelete(title);
+    public String deleteBoard(@RequestParam("number") Integer number){
+        log.info("{}",number);
+        boardService.writeDelete(number);
         return "redirect:/boardHome";
     }
 }

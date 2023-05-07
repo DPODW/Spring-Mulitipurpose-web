@@ -22,6 +22,7 @@
         <h4>글 본문</h4>
             <div id="write_area">
                 <form enctype="multipart/form-data" th:action="@{/boards/board2}" method="post">
+                    <input type="hidden" id="number" name="number" th:value="${deleteContent.number}"/>
                     <p>
                          <h4>작성자↓ </h4>
                     <textarea type="name" id="WriterName" name="id" th:text="${deleteContent.id}" placeholder="이름" readonly> </textarea>
