@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import static com.multipurpose.web.controller.memberController.FlashData.*;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/userU")
 public class UpdateCheckController {
 
-    private MemberService memberService;
     private final JoinCheckService joinCheckService;
 
     @PostMapping("/pwd")
@@ -28,11 +29,13 @@ public class UpdateCheckController {
                                @ModelAttribute JoinMember idMember,
                                RedirectAttributes redirectAttributes) {
         if (joinCheckService.comparePwdCheck(updatePwdCheck, idMember.getJoinPwd()) == true) {
-            redirectAttributes.addFlashAttribute("updatePwdCheck", updatePwdCheck);
+            UFlashDataPwd(updatePwdCheck, redirectAttributes);
         } else {
-            redirectAttributes.addFlashAttribute("UpdatePwdCheckFail", updatePwdCheck);
+            log.info("업데이트 비밀번호 검증 오류");
+            UFlashDataPwdFail(updatePwdCheck, redirectAttributes);
         }
-        redirectAttributes.addFlashAttribute("idMember", idMember);
+        flashDataIdMember(idMember, redirectAttributes);
+
         return "redirect:/user/member1?form";
     }
 
@@ -44,11 +47,12 @@ public class UpdateCheckController {
                                        @ModelAttribute JoinMember idMember,
                                        RedirectAttributes redirectAttributes) {
         if(joinCheckService.duplicateCallCheck(updateCall) == true || joinCheckService.existingCallPermitCheck(idMember.getJoinId(),updateCall) == true) {
-            redirectAttributes.addFlashAttribute("joinCall", updateCall);
+            UFlashDataCall(updateCall, redirectAttributes);
         } else {
-            redirectAttributes.addFlashAttribute("joinCallFail", updateCall);
+            log.info("업데이트 전화번호 검증 오류");
+            UFlashDataCallFail(updateCall, redirectAttributes);
         }
-        redirectAttributes.addFlashAttribute("idMember", idMember);
+        flashDataIdMember(idMember, redirectAttributes);
         return "redirect:/user/member1?form";
     }
 

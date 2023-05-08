@@ -87,7 +87,8 @@ public class MemberController {
                                Model model){
         if(!bindingResult.hasErrors() &&
           joinCheckService.comparePwdCheck(joinPwdCheck,updateMember.getJoinPwd()) &&
-          joinCheckService.existingCallPermitCheck(updateMember.getJoinId(),joinCall)
+          joinCheckService.existingCallPermitCheck(updateMember.getJoinId(),joinCall) ||
+          joinCheckService.duplicateCallCheck(joinCall)
           ) {
             JoinMember memberUpdate = memberService.memberUpdate(updateMember);
             model.addAttribute("idMember",memberUpdate);
