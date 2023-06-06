@@ -30,6 +30,13 @@ public class MemberController {
 
     @GetMapping("/joins")
     public String joinForm(JoinMember joinMember , Model model,HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+            log.info("joinForm 세션 정상 삭제");
+        }else {
+            log.info("joinForm 세션이 이미 삭제되었거나 없습니다.");
+        }
         model.addAttribute("joinMember", joinMember);
         return "memberView/Join";
     }
@@ -87,8 +94,8 @@ public class MemberController {
                                Model model){
         if(!bindingResult.hasErrors() &&
           joinCheckService.comparePwdCheck(joinPwdCheck,updateMember.getJoinPwd()) &&
-          joinCheckService.existingCallPermitCheck(updateMember.getJoinId(),joinCall) ||
-          joinCheckService.duplicateCallCheck(joinCall)
+          (joinCheckService.existingCallPermitCheck(updateMember.getJoinId(),joinCall) ||
+          joinCheckService.duplicateCallCheck(joinCall))
           ) {
             JoinMember memberUpdate = memberService.memberUpdate(updateMember);
             model.addAttribute("idMember",memberUpdate);

@@ -24,7 +24,14 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/logins")
-    public String loginForm(Model model){
+    public String loginForm(Model model,HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+            log.info("loginForm 세션 삭제");
+        }else {
+            log.info("loginForm 세션 이미 삭제되었거나 없습니다.");
+        }
         model.addAttribute("loginMember" ,new LoginMember());
         return "logins/Login";
     }
